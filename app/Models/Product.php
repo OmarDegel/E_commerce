@@ -1,0 +1,22 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Product extends Model
+{
+    protected $appends = ['image_url'];
+    
+    
+    public function getImageUrlAttribute()
+    {
+        if (!$this->image || $this->image == "") return null;
+        return asset('/uploads/products/small/' . $this->image);
+    }
+    public function productImages()
+    {
+        return $this->hasMany(ProdeuctImage::class);
+    }
+
+}
